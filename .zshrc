@@ -135,3 +135,6 @@ fi
 # Load everything
 zplug load
 export PATH="/usr/local/bin:$PATH"
+export PATH="~/bin:$PATH"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
