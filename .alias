@@ -32,18 +32,17 @@ alias untar="tar xvzf"
 alias localip="ipconfig getifaddr en0"
 alias worldip="curl -s http://checkip.dyndns.com/ | sed 's/[^0-9\.]//g'"
 
-#For python3
-
+# Programs
 alias py="python3"
 alias pyc="open -a PyCharm\ CE"
-function pyn() {
-        file=$1.py
-        echo "#!/usr/bin/env python3\n
-#This python-script $1 is developed from:
-__author__ = \"Anselm .W Hahn\"
-__version__ = \"0.1a\"
-__date__ = \"$(date +%d.%m.%y-%H:%M:%S)\"\n" > $file
-}
+alias qtn="jupyter qtconsole --style stata-dark"
+alias dash="open -a Dash"
+alias brc="open -a Brackets"
+
+# For Programming
+alias pycheckI="pycodestyle --statistics --show-source  --show-pep8"
+alias pycheckII="pycodestyle --first test"
+alias pep8clean="autopep8 --in-place --aggressive --aggressive"
 # Shows most used commands
 alias profileme="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
 
