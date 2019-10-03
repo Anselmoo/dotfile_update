@@ -20,6 +20,7 @@ cp -i alias ~/.alias
 
 
 echo "Setting-up python3"
+python3 get-pip.py
 pip3 install -r requirements.txt 
 
 echo "Bootstrapping complete"
