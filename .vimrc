@@ -1,4 +1,4 @@
-" vim-bootstrap 
+""vim-bootstrap 
 
 "*****************************************************************************
 "" Vim-PLug core
@@ -177,7 +177,7 @@ set ruler
 set number
 
 let no_buffers_menu=1
-silent! colorscheme molokai
+silent! colorscheme snow
 
 set mousemodel=popup
 set t_Co=256
@@ -217,8 +217,8 @@ endif
 
 " Change color
 "
-set background=dark
-colorscheme hybrid
+" set background=dark
+" colorscheme gruvbox
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
@@ -541,7 +541,10 @@ augroup END
 
 " RUST
 let g:rust_clip_command = 'pbcopy'
-" autocmd BufNewFile,BufRead *.rs setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
+let g:rust_recommended_style = 0
+let g:rust_fold = 1
+let g:syntastic_rust_checkers = ['cargo']
+autocmd BufNewFile,BufRead *.rs setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 " python
 " vim-python
