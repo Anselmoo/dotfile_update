@@ -1,2 +1,4 @@
 os: osx
-script: brew update
+script:
+  - brew update
+  - brew bundle
