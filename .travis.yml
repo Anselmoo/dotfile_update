@@ -1,3 +1,5 @@
 os: osx
+language: bash
 sudo: required
-script: ./install.sh
+script:
+  - bash install.sh
