@@ -18,4 +18,8 @@ cp -i zshrc ~/.zshrc
 cp -i tmux ~/.tmux
 cp -i alias ~/.alias
 
+
+echo "Setting-up python3"
+pip3 install -r requirements.txt 
+
 echo "Bootstrapping complete"
