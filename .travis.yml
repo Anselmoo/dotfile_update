@@ -1,4 +1,2 @@
 os: osx
-script:
-  - brew update
-  - brew bundle
+script: ./install.sh
