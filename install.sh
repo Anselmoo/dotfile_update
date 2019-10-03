@@ -17,3 +17,5 @@ cp -i vimrc ~/.vimrc
 cp -i zshrc ~/.zshrc
 cp -i tmux ~/.tmux
 cp -i alias ~/.alias
+
+echo "Bootstrapping complete"
