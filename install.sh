@@ -20,6 +20,7 @@ cp -i alias ~/.alias
 
 
 echo "Setting-up python3"
+curl -O https://bootstrap.pypa.io/get-pip.py
 python3 get-pip.py
 pip3 install -r requirements.txt 
 
