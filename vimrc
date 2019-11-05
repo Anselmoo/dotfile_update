@@ -1,5 +1,5 @@
-""vim-bootstrap 
-
+"vim-bootstrap 
+"
 "*****************************************************************************
 "" Vim-PLug core
 "*****************************************************************************
@@ -43,7 +43,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'avelino/vim-bootstrap-updater'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-rhubarb' " required by fugitive to :Gbrowse
-"Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 else
@@ -98,9 +98,10 @@ Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 
 
 " python
-"" Python Bundle
-Plug 'davidhalter/jedi-vim'
+" Fast python completion (use ncm2 if you want type info or snippet support)
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
+Plug 'elzr/vim-json', { 'for': 'json' }
+Plug 'ingydotnet/yaml-vim', { 'for': ['yaml', 'yml'] }
 
 " Julia
 "" Julia Bundle
@@ -178,6 +179,7 @@ set number
 
 let no_buffers_menu=1
 silent! colorscheme snow
+silent! set background=dark
 
 set mousemodel=popup
 set t_Co=256
@@ -194,7 +196,7 @@ else
 
   " IndentLine
   let g:indentLine_enabled = 1
-  let g:indentLine_concealcursor = 1
+  let g:indentLine_concealcursr = 1
   let g:indentLine_char = '┆'
   let g:indentLine_faster = 1
   let g:indentLine_color_term = 239
@@ -401,10 +403,10 @@ nnoremap <silent> <leader>e :FZF -m<CR>
 nmap <leader>y :History:<CR>
 
 " snippets
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<tab>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-b>"
-"let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+let g:UltiSnipsEditSplit="vertical"
 
 " ale
 let g:ale_linters = {}
@@ -466,6 +468,7 @@ nnoremap <Leader>o :.Gbrowse<CR>
 "*****************************************************************************
 "" Custom configs
 "*****************************************************************************
+
 
 " c
 autocmd FileType c setlocal tabstop=4 shiftwidth=4 expandtab
@@ -555,17 +558,24 @@ augroup vimrc-python
       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
 
-" jedi-vim
-"let g:jedi#popup_on_dot = 1
-let g:jedi#force_py_version=3
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = "<leader>d"
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#show_call_signatures = "0"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#smart_auto_mappings = 0
+" YouCompleteMe
+
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_min_num_identifier_candidate_chars = 4
+let g:ycm_extra_conf_globlist = ['~/repos/*']
+let g:ycm_filetype_specific_completion_to_disable = {'javascript': 1}
+let g:ycm_rust_src_path = $HOME . '/repos/rust/src'
+
+" Also see the 'pumheight' vim option!
+let g:ycm_max_num_identifier_candidates = 10
+let g:ycm_clangd_uses_ycmd_caching = 1
+
+nnoremap <leader>y :YcmForceCompileAndDiagnostics<cr>
+nnoremap <leader>g :YcmCompleter GoTo<CR>
+nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
+nnoremap <f6> :YcmCompleter RefactorRename<space>
+
 
 " ale
 :call extend(g:ale_linters, {
