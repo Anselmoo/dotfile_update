@@ -5,7 +5,7 @@
 "*****************************************************************************
 let vimplug_exists=expand('~/.vim/autoload/plug.vim')
 
-let g:vim_bootstrap_langs = "c,go,python"
+let g:vim_bootstrap_langs = "c,go,python,rust,julia"
 let g:vim_bootstrap_editor = "vim"				" nvim or vim
 
 if !filereadable(vimplug_exists)
@@ -67,6 +67,8 @@ Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 
+"" Crosshair
+Plug 'chreekat/vim-paren-crosshairs'
 "" Color
 Plug 'tomasr/molokai'
 "" New Color Schemes
