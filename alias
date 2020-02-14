@@ -1,9 +1,14 @@
 # Directory Listing
+alias ls='ls --color=auto'
 alias ll='ls -laGh'
 alias l.='ls -dlh .* --color=auto' #show only hidden files
 alias size='du -P -skh *' # Lists folders and files sizes in the current folder
 alias cp_folder="cp -Rpv" #copies folder and all sub files and folders, preserving security and dates
-
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto' #extended global regular expression
+alias fgrep='fgrep --color=auto' #fast global regular expression
 alias colorslist="set | egrep 'COLOR_\w*'"  # lists all the colors
 
 # Navigation
