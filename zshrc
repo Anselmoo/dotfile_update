@@ -1,12 +1,6 @@
 # :: Zplug - ZSH plugin manager
 export ZPLUG_HOME=$HOME/.zplug
 
-# Check if zplug is installed
-if [[ ! -d $ZPLUG_HOME ]]; then
-  git clone https://github.com/zplug/zplug $ZPLUG_HOME
-  source $ZPLUG_HOME/init.zsh && zplug update --self
-fi
-
 # Essential
 source $ZPLUG_HOME/init.zsh
 
@@ -33,7 +27,6 @@ zplug "zsh-users/zsh-history-substring-search", defer:3, on:"zsh-users/zsh-synta
 zplug "lib/clipboard", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
 zplug "plugins/vi-mode", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/brew", from:oh-my-zsh
 zplug "plugins/virtalenv", from:oh-my-zsh
 
 # Enhanced cd
@@ -56,10 +49,10 @@ zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 
 # Theme setup
 #POWERLEVEL9K_MODE='awesome-fontconfig'
-POWERLEVEL9K_MODE='nerdfont-complete'
+#POWERLEVEL9K_MODE='nerdfont-complete'
 POWERLEVEL9K_PROMPT_ON_NEWLINE=false
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
-POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="❱ "
+POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="â± "
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir dir_writable vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time todo background_jobs os_icon)
 POWERLEVEL9K_DISABLE_RPROMPT=false
@@ -91,7 +84,7 @@ POWERLEVEL9K_NODE_VERSION_FOREGROUND="white"
 plugins=(virtualenv)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status virtualenv)
 
-export ZSH_PLUGINS_ALIAS_TIPS_TEXT=' alias hint: '
+export ZSH_PLUGINS_ALIAS_TIPS_TEXT='ïš alias hint: '
 
 # User configuration
 export PATH="$HOME/.dotfiles/bin:$HOME/.bin:/usr/local/bin:$PATH"
@@ -108,8 +101,8 @@ alias bd="deletemark"
 alias j="jump"
 alias td="todo.sh"
 
-
-. ~/.alias
+# Loading the big alias-list as shortcuts-dotfile
+. ~/.shortcuts
 
 # Multiline/Singleline
 alias multi_line="export POWERLEVEL9K_PROMPT_ON_NEWLINE=true"
@@ -127,6 +120,17 @@ function ubuntu-dev {
   docker run -ti --rm --name $name --hostname $name --volumes-from dev-volumes -w $PWD -u dev drahosp/ubuntu-dev "$@"
 }
 
+# Look for app if cannot be found
+
+if [[ -x /usr/lib/command-not-found ]] ; then
+        if (( ! ${+functions[command_not_found_handler]} )) ; then
+                function command_not_found_handler {
+                        [[ -x /usr/lib/command-not-found ]] || return 1
+                        /usr/lib/command-not-found --no-failure-msg -- ${1+"$1"} && :
+                }
+        fi
+fi
+
 # Install plugins if there are plugins that have not been installed
 if ! zplug check; then
    zplug install
@@ -136,5 +140,3 @@ fi
 zplug load
 export PATH="/usr/local/bin:$PATH"
 export PATH="~/bin:$PATH"
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
