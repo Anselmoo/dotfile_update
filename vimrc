@@ -44,6 +44,7 @@ Plug 'avelino/vim-bootstrap-updater'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-rhubarb' " required by fugitive to :Gbrowse
 Plug 'Valloric/YouCompleteMe'
+Plug 'heavenshell/vim-pydocstring' " Pydoc completer for vim
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 else
@@ -180,9 +181,20 @@ set ruler
 set number
 
 let no_buffers_menu=1
-silent! colorscheme snow
+"let g:despacio_Sunset=1
+"silent! colorscheme despacio
+"silent! colorscheme hydrangea 
+let g:lightline = {
+            \ 'colorscheme': 'deepspace',
+            \ 'component': {
+            \   'readonly': '%{&readonly?"î‚¢":""}',
+            \ },
+            \ 'separator':    { 'left': 'î‚°', 'right': 'î‚²' },
+            \ 'subseparator': { 'left': 'î‚±', 'right': 'î‚³' },
+            \ }
 silent! set background=dark
-
+silent! set termguicolors
+silent! colorscheme deep-space
 set mousemodel=popup
 set t_Co=256
 set guioptions=egmrti
@@ -199,7 +211,7 @@ else
   " IndentLine
   let g:indentLine_enabled = 1
   let g:indentLine_concealcursr = 1
-  let g:indentLine_char = '┆'
+  let g:indentLine_char = 'â”†'
   let g:indentLine_faster = 1
   let g:indentLine_color_term = 239
 
@@ -251,7 +263,8 @@ if exists("*fugitive#statusline")
 endif
 
 " vim-airline
-let g:airline_theme = 'powerlineish'
+" let g:airline_theme = 'powerlineish'
+let g:airline_theme = 'deep_space'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -308,7 +321,10 @@ if !exists('*s:setupWrapping')
   function s:setupWrapping()
     set wrap
     set wm=2
-    set textwidth=79
+    " black (default)
+    set textwidth=88
+    " pep8
+    " set textwidth=79
   endfunction
 endif
 
@@ -340,6 +356,8 @@ augroup vimrc-make-cmake
   autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
 augroup END
 
+
+"" make pydoc
 set autoread
 
 "*****************************************************************************
@@ -549,13 +567,15 @@ let g:rust_clip_command = 'pbcopy'
 let g:rust_recommended_style = 0
 let g:rust_fold = 1
 let g:syntastic_rust_checkers = ['cargo']
-autocmd BufNewFile,BufRead *.rs setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
-
+augroup vimrc-rust
+    autocmd BufNewFile,BufRead *.rs setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
+augroup END
 " python
 " vim-python
 augroup vimrc-python
   autocmd!
-  autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 colorcolumn=79
+  " pep8-standard is 79, but changed to 88 black-standard
+  autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 colorcolumn=88
       \ formatoptions+=croq softtabstop=4
       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
@@ -591,7 +611,7 @@ let g:airline#extensions#virtualenv#enabled = 1
 let g:polyglot_disabled = ['python']
 let python_highlight_all = 1
 
-
+let g:pydocstring_formatter = 'numpy'
 
 "*****************************************************************************
 "*****************************************************************************
@@ -613,30 +633,30 @@ endif
 if !exists('g:airline_powerline_fonts')
   let g:airline#extensions#tabline#left_sep = ' '
   let g:airline#extensions#tabline#left_alt_sep = '|'
-  let g:airline_left_sep          = '▶'
-  let g:airline_left_alt_sep      = '»'
-  let g:airline_right_sep         = '◀'
-  let g:airline_right_alt_sep     = '«'
-  let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
-  let g:airline#extensions#readonly#symbol   = '⊘'
-  let g:airline#extensions#linecolumn#prefix = '¶'
-  let g:airline#extensions#paste#symbol      = 'ρ'
-  let g:airline_symbols.linenr    = '␊'
-  let g:airline_symbols.branch    = '⎇'
-  let g:airline_symbols.paste     = 'ρ'
-  let g:airline_symbols.paste     = 'Þ'
-  let g:airline_symbols.paste     = '∥'
-  let g:airline_symbols.whitespace = 'Ξ'
+  let g:airline_left_sep          = 'â–¶'
+  let g:airline_left_alt_sep      = 'Â»'
+  let g:airline_right_sep         = 'â—€'
+  let g:airline_right_alt_sep     = 'Â«'
+  let g:airline#extensions#branch#prefix     = 'â¤´' "âž”, âž¥, âŽ‡
+  let g:airline#extensions#readonly#symbol   = 'âŠ˜'
+  let g:airline#extensions#linecolumn#prefix = 'Â¶'
+  let g:airline#extensions#paste#symbol      = 'Ï'
+  let g:airline_symbols.linenr    = 'âŠ'
+  let g:airline_symbols.branch    = 'âŽ‡'
+  let g:airline_symbols.paste     = 'Ï'
+  let g:airline_symbols.paste     = 'Ãž'
+  let g:airline_symbols.paste     = 'âˆ¥'
+  let g:airline_symbols.whitespace = 'Îž'
 else
-  let g:airline#extensions#tabline#left_sep = ''
-  let g:airline#extensions#tabline#left_alt_sep = ''
+  let g:airline#extensions#tabline#left_sep = 'î‚°'
+  let g:airline#extensions#tabline#left_alt_sep = 'î‚±'
 
   " powerline symbols
-  let g:airline_left_sep = ''
-  let g:airline_left_alt_sep = ''
-  let g:airline_right_sep = ''
-  let g:airline_right_alt_sep = ''
-  let g:airline_symbols.branch = ''
-  let g:airline_symbols.readonly = ''
-  let g:airline_symbols.linenr = ''
+  let g:airline_left_sep = 'î‚°'
+  let g:airline_left_alt_sep = 'î‚±'
+  let g:airline_right_sep = 'î‚²'
+  let g:airline_right_alt_sep = 'î‚³'
+  let g:airline_symbols.branch = 'î‚ '
+  let g:airline_symbols.readonly = 'î‚¢'
+  let g:airline_symbols.linenr = 'î‚¡'
 endif
