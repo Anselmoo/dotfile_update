@@ -105,7 +105,7 @@ Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'ingydotnet/yaml-vim', { 'for': ['yaml', 'yml'] }
-
+Plugin 'psf/black'
 " Julia
 "" Julia Bundle
 Plug 'benekastah/neomake'
@@ -579,7 +579,8 @@ augroup vimrc-python
       \ formatoptions+=croq softtabstop=4
       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
-
+" add default black
+autocmd BufWritePre *.py execute ':Black'
 " YouCompleteMe
 
 let g:ycm_autoclose_preview_window_after_completion = 1
