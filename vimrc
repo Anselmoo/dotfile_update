@@ -105,7 +105,7 @@ Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'ingydotnet/yaml-vim', { 'for': ['yaml', 'yml'] }
-Plugin 'psf/black'
+Plug 'psf/black'
 " Julia
 "" Julia Bundle
 Plug 'benekastah/neomake'
