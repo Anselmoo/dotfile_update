@@ -101,8 +101,8 @@ alias bd="deletemark"
 alias j="jump"
 alias td="todo.sh"
 
-# Loading the big alias-list as shortcuts-dotfile
-. ~/.shortcuts
+# Loading the big alias-list as alias-dotfile
+. ~/.alias
 
 # Multiline/Singleline
 alias multi_line="export POWERLEVEL9K_PROMPT_ON_NEWLINE=true"
