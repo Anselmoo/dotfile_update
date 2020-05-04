@@ -27,13 +27,16 @@ call plug#begin(expand('~/.vim/plugged'))
 "*****************************************************************************
 "" Plug install packages
 "*****************************************************************************
+
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
+Plug 'majutsushi/tagbar'
+Plug 'ervandew/supertab'
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'airblade/vim-gitgutter'
+
 Plug 'vim-scripts/grep.vim'
 Plug 'vim-scripts/CSApprox'
 Plug 'Raimondi/delimitMate'
@@ -43,6 +46,30 @@ Plug 'Yggdroot/indentLine'
 Plug 'avelino/vim-bootstrap-updater'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-rhubarb' " required by fugitive to :Gbrowse
+
+
+" Markdown / Writting
+Plug 'reedes/vim-pencil'
+Plug 'tpope/vim-markdown'
+Plug 'jtratner/vim-flavored-markdown'
+
+" Git Support
+Plug 'kablamo/vim-git-log'
+Plug 'gregsexton/gitv'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'jaxbot/github-issues.vim'
+
+" Generic Programming Support 
+Plug 'jakedouglas/exuberant-ctags'
+Plug 'honza/vim-snippets'
+Plug 'Townk/vim-autoclose'
+Plug 'tomtom/tcomment_vim'
+Plug 'tobyS/vmustache'
+Plug 'janko-m/vim-test'
+Plug 'maksimr/vim-jsbeautify'
+Plug 'vim-syntastic/syntastic'
+Plug 'neomake/neomake'
 Plug 'Valloric/YouCompleteMe'
 Plug 'heavenshell/vim-pydocstring' " Pydoc completer for vim
 if isdirectory('/usr/local/opt/fzf')
@@ -105,7 +132,7 @@ Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'ingydotnet/yaml-vim', { 'for': ['yaml', 'yml'] }
-Plug 'psf/black'
+
 " Julia
 "" Julia Bundle
 Plug 'benekastah/neomake'
@@ -251,7 +278,24 @@ set title
 set titleold="Terminal"
 set titlestring=%F
 
+" Syntastic Configuration
 set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+
+" Neomake settings
+autocmd! BufWritePost * Neomake
+let g:neomake_elixir_enabled_makers = ['mix', 'credo', 'dogma']
+
+" Markdown Syntax Support
+augroup markdown
+    au!
+    au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+augroup END
+
+" Vim-Supertab Configuration
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
@@ -263,8 +307,9 @@ if exists("*fugitive#statusline")
 endif
 
 " vim-airline
-" let g:airline_theme = 'powerlineish'
-let g:airline_theme = 'deep_space'
+let g:airline_theme = 'powerlineish'
+" let g:airline_theme = 'deep_space'
+" let g:airline_theme = 'hybrid'
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -422,7 +467,7 @@ nnoremap <silent> <leader>e :FZF -m<CR>
 "Recovery commands from history through FZF
 nmap <leader>y :History:<CR>
 
-" snippets
+" snippets for YouCompleteMe
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-b>"
@@ -432,7 +477,7 @@ let g:UltiSnipsEditSplit="vertical"
 let g:ale_linters = {}
 
 " Tagbar
-nmap <silent> <F4> :TagbarToggle<CR>
+nmap <silent> <F8> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
 " Disable visualbell
@@ -579,8 +624,7 @@ augroup vimrc-python
       \ formatoptions+=croq softtabstop=4
       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
-" add default black
-autocmd BufWritePre *.py execute ':Black'
+
 " YouCompleteMe
 
 let g:ycm_autoclose_preview_window_after_completion = 1
