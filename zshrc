@@ -103,7 +103,7 @@ alias sb="showmarks"
 alias td="todo.sh"
 
 # Loading the big alias-list as shortcuts-dotfile
-. ~/.shortcuts
+. ~/.alias
 
 # Multiline/Singleline
 alias multi_line="export POWERLEVEL9K_PROMPT_ON_NEWLINE=true"
