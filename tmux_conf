@@ -47,6 +47,7 @@ bind c new-window -c "#{pane_current_path}"
 set-option -g status-position top
 set-option -g repeat-time 0
 
+
 # Copy paste integration on macOS
 if-shell 'test "$(uname -s)" = Darwin' 'set-option -g default-command "exec reattach-to-user-namespace -l zsh"'
 
@@ -54,4 +55,4 @@ if-shell 'test "$(uname -s)" = Darwin' 'set-option -g default-command "exec reat
 setw -g mode-keys vi
 
 # Bind ']' to use pbpaste
-bind ] run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
+bind ] run 'reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer'
