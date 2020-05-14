@@ -38,12 +38,11 @@ alias localip="ipconfig getifaddr en0"
 alias worldip="curl -s http://checkip.dyndns.com/ | sed 's/[^0-9\.]//g'"
 
 # Programs
-alias py="python3"
-alias pyc="open -a PyCharm\ CE"
+alias py="python3.7"
 alias qtn="jupyter qtconsole --style stata-dark"
-alias dash="open -a Dash"
-alias brc="open -a Brackets"
 
+# For json
+alias jsonpretty="python3 -m json.tool"
 # For Programming
 alias pycheckI="pycodestyle --statistics --show-source  --show-pep8"
 alias pycheckII="pycodestyle --first test"
