@@ -52,7 +52,7 @@ zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 #POWERLEVEL9K_MODE='nerdfont-complete'
 POWERLEVEL9K_PROMPT_ON_NEWLINE=false
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
-POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="â± "
+POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="❱ "
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir dir_writable vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time todo background_jobs os_icon)
 POWERLEVEL9K_DISABLE_RPROMPT=false
@@ -84,7 +84,7 @@ POWERLEVEL9K_NODE_VERSION_FOREGROUND="white"
 plugins=(virtualenv)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status virtualenv)
 
-export ZSH_PLUGINS_ALIAS_TIPS_TEXT='ïš alias hint: '
+export ZSH_PLUGINS_ALIAS_TIPS_TEXT=' alias hint: '
 
 # User configuration
 export PATH="$HOME/.dotfiles/bin:$HOME/.bin:/usr/local/bin:$PATH"
@@ -99,10 +99,11 @@ alias kk="k -a"
 alias b="bookmark"
 alias bd="deletemark"
 alias j="jump"
+alias sb="showmarks"
 alias td="todo.sh"
 
-# Loading the big alias-list as alias-dotfile
-. ~/.alias
+# Loading the big alias-list as shortcuts-dotfile
+. ~/.shortcuts
 
 # Multiline/Singleline
 alias multi_line="export POWERLEVEL9K_PROMPT_ON_NEWLINE=true"
