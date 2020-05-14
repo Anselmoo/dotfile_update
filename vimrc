@@ -214,10 +214,10 @@ let no_buffers_menu=1
 let g:lightline = {
             \ 'colorscheme': 'deepspace',
             \ 'component': {
-            \   'readonly': '%{&readonly?"î‚¢":""}',
+            \   'readonly': '%{&readonly?"":""}',
             \ },
-            \ 'separator':    { 'left': 'î‚°', 'right': 'î‚²' },
-            \ 'subseparator': { 'left': 'î‚±', 'right': 'î‚³' },
+            \ 'separator':    { 'left': '', 'right': '' },
+            \ 'subseparator': { 'left': '', 'right': '' },
             \ }
 silent! set background=dark
 silent! set termguicolors
@@ -238,7 +238,7 @@ else
   " IndentLine
   let g:indentLine_enabled = 1
   let g:indentLine_concealcursr = 1
-  let g:indentLine_char = 'â”†'
+  let g:indentLine_char = '┆'
   let g:indentLine_faster = 1
   let g:indentLine_color_term = 239
 
@@ -477,7 +477,7 @@ let g:UltiSnipsEditSplit="vertical"
 let g:ale_linters = {}
 
 " Tagbar
-nmap <silent> <F8> :TagbarToggle<CR>
+nmap <silent> <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
 " Disable visualbell
@@ -641,13 +641,15 @@ nnoremap <leader>y :YcmForceCompileAndDiagnostics<cr>
 nnoremap <leader>g :YcmCompleter GoTo<CR>
 nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
-nnoremap <f6> :YcmCompleter RefactorRename<space>
+nnoremap <F9> :YcmCompleter RefactorRename<space>
 
 
 " ale
-:call extend(g:ale_linters, {
-    \'python': ['flake8'], })
-
+" :call extend(g:ale_linters, {
+"    \'python': ['flake8'], })
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_flake8_post__args='--max-line-length=88'
+" let g:syntastic_flake8_max_line_length="88"
 " vim-airline
 let g:airline#extensions#virtualenv#enabled = 1
 
@@ -657,6 +659,12 @@ let g:polyglot_disabled = ['python']
 let python_highlight_all = 1
 
 let g:pydocstring_formatter = 'numpy'
+
+" Vim comand for python and black
+nnoremap <F5> <Esc>:w<CR>:! clear; python3 %<CR>
+nnoremap <F6> <Esc>:w<CR>:! clear; black %<CR>
+nnoremap <F7> <Esc>:w<CR>:%! python3 -m json.tool <CR>
+"nnoremap <F6> :! clear; black %<CR>
 
 "*****************************************************************************
 "*****************************************************************************
@@ -678,30 +686,30 @@ endif
 if !exists('g:airline_powerline_fonts')
   let g:airline#extensions#tabline#left_sep = ' '
   let g:airline#extensions#tabline#left_alt_sep = '|'
-  let g:airline_left_sep          = 'â–¶'
-  let g:airline_left_alt_sep      = 'Â»'
-  let g:airline_right_sep         = 'â—€'
-  let g:airline_right_alt_sep     = 'Â«'
-  let g:airline#extensions#branch#prefix     = 'â¤´' "âž”, âž¥, âŽ‡
-  let g:airline#extensions#readonly#symbol   = 'âŠ˜'
-  let g:airline#extensions#linecolumn#prefix = 'Â¶'
-  let g:airline#extensions#paste#symbol      = 'Ï'
-  let g:airline_symbols.linenr    = 'âŠ'
-  let g:airline_symbols.branch    = 'âŽ‡'
-  let g:airline_symbols.paste     = 'Ï'
-  let g:airline_symbols.paste     = 'Ãž'
-  let g:airline_symbols.paste     = 'âˆ¥'
-  let g:airline_symbols.whitespace = 'Îž'
+  let g:airline_left_sep          = '▶'
+  let g:airline_left_alt_sep      = '»'
+  let g:airline_right_sep         = '◀'
+  let g:airline_right_alt_sep     = '«'
+  let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
+  let g:airline#extensions#readonly#symbol   = '⊘'
+  let g:airline#extensions#linecolumn#prefix = '¶'
+  let g:airline#extensions#paste#symbol      = 'ρ'
+  let g:airline_symbols.linenr    = '␊'
+  let g:airline_symbols.branch    = '⎇'
+  let g:airline_symbols.paste     = 'ρ'
+  let g:airline_symbols.paste     = 'Þ'
+  let g:airline_symbols.paste     = '∥'
+  let g:airline_symbols.whitespace = 'Ξ'
 else
-  let g:airline#extensions#tabline#left_sep = 'î‚°'
-  let g:airline#extensions#tabline#left_alt_sep = 'î‚±'
+  let g:airline#extensions#tabline#left_sep = ''
+  let g:airline#extensions#tabline#left_alt_sep = ''
 
   " powerline symbols
-  let g:airline_left_sep = 'î‚°'
-  let g:airline_left_alt_sep = 'î‚±'
-  let g:airline_right_sep = 'î‚²'
-  let g:airline_right_alt_sep = 'î‚³'
-  let g:airline_symbols.branch = 'î‚ '
-  let g:airline_symbols.readonly = 'î‚¢'
-  let g:airline_symbols.linenr = 'î‚¡'
+  let g:airline_left_sep = ''
+  let g:airline_left_alt_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_right_alt_sep = ''
+  let g:airline_symbols.branch = ''
+  let g:airline_symbols.readonly = ''
+  let g:airline_symbols.linenr = ''
 endif
