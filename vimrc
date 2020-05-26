@@ -69,7 +69,8 @@ Plug 'tobyS/vmustache'
 Plug 'janko-m/vim-test'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'vim-syntastic/syntastic'
-Plug 'neomake/neomake'
+Plug 'neomake/neomake' 
+" Plug 'dojoteef/neomake-autolint'
 Plug 'Valloric/YouCompleteMe'
 Plug 'heavenshell/vim-pydocstring' " Pydoc completer for vim
 if isdirectory('/usr/local/opt/fzf')
@@ -142,7 +143,7 @@ Plug 'ingydotnet/yaml-vim', { 'for': ['yaml', 'yml'] }
 
 " Julia
 "" Julia Bundle
-Plug 'benekastah/neomake'
+" Plug 'benekastah/neomake'
 Plug 'zyedidia/julialint.vim'
 Plug 'JuliaEditorSupport/julia-vim'
 
@@ -215,11 +216,10 @@ set ruler
 set number
 
 let no_buffers_menu=1
-"let g:despacio_Sunset=1
-"silent! colorscheme despacio
-"silent! colorscheme despacio 
+" let g:despacio_Sunset=1
+silent! colorscheme gruvbox
 let g:lightline = {
-            \ 'colorscheme': 'despacio',
+            \ 'colorscheme': 'gruvbox',
             \ 'component': {
             \   'readonly': '%{&readonly?"î‚¢":""}',
             \ },
@@ -228,7 +228,6 @@ let g:lightline = {
             \ }
 silent! set background=dark
 silent! set termguicolors
-silent! colorscheme hydrangea
 set mousemodel=popup
 set t_Co=256
 set guioptions=egmrti
@@ -294,7 +293,18 @@ let g:syntastic_check_on_open = 1
 " Neomake settings
 autocmd! BufWritePost * Neomake
 let g:neomake_elixir_enabled_makers = ['mix', 'credo', 'dogma']
+let g:neomake_open_list = 2
+let g:neomake_python_flake8_maker = {'args': ['--max-line-length=88']}
+let g:neomake_place_signs = 1
+let g:neomake_python_enabled_makers = ['flake8', 'pep8', 'vulture']
+let g:neomake_python_pep8_maker = {'args': ['--max-line-length=88']}
 
+
+" let g:neomake_autolint_enabled = 1
+" let g:neomake_autolint_events = {
+"      \ 'InsertLeave': {'delay': 0},
+"      \ 'TextChanged': {},
+"      \ }
 " Markdown Syntax Support
 augroup markdown
     au!
@@ -413,7 +423,7 @@ augroup vimrc-anyfold
     autocmd!
     autocmd Filetype * AnyFoldActivate
     set foldlevel=0
-    colorscheme despacio
+    colorscheme iceberg
     hi Folded term=underline
 augroup END
 "" make pydoc
@@ -663,7 +673,6 @@ nnoremap <F9> :YcmCompleter RefactorRename<space>
 "    \'python': ['flake8'], })
 let g:syntastic_python_checkers=['flake8']
 let g:syntastic_python_flake8_post__args='--max-line-length=88'
-" let g:syntastic_flake8_max_line_length="88"
 " vim-airline
 let g:airline#extensions#virtualenv#enabled = 1
 
