@@ -97,8 +97,13 @@ Plug 'honza/vim-snippets'
 
 "" Crosshair
 Plug 'chreekat/vim-paren-crosshairs'
+
+"" Foldmethod
+Plug 'pseewald/vim-anyfold'
+
 "" Color
 Plug 'tomasr/molokai'
+
 "" New Color Schemes
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'morhetz/gruvbox'
@@ -106,11 +111,13 @@ Plug 'yuttie/hydrangea-vim'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'AlessandroYorba/Despacio'
 Plug 'cocopon/iceberg.vim'
-" Current one
+
+"" Current one
 Plug 'w0ng/vim-hybrid'
 Plug 'nightsense/snow'
 Plug 'nightsense/stellarized'
 Plug 'arcticicestudio/nord-vim'
+
 
 "
 "*****************************************************************************
@@ -158,7 +165,7 @@ filetype plugin indent on
 
 "*****************************************************************************
 "" Basic Setup
-"*****************************************************************************"
+"*****************************************************************************
 "" Encoding
 set encoding=utf-8
 set fileencoding=utf-8
@@ -210,18 +217,18 @@ set number
 let no_buffers_menu=1
 "let g:despacio_Sunset=1
 "silent! colorscheme despacio
-"silent! colorscheme hydrangea 
+"silent! colorscheme despacio 
 let g:lightline = {
-            \ 'colorscheme': 'deepspace',
+            \ 'colorscheme': 'despacio',
             \ 'component': {
-            \   'readonly': '%{&readonly?"":""}',
+            \   'readonly': '%{&readonly?"î‚¢":""}',
             \ },
-            \ 'separator':    { 'left': '', 'right': '' },
-            \ 'subseparator': { 'left': '', 'right': '' },
+            \ 'separator':    { 'left': 'î‚°', 'right': 'î‚²' },
+            \ 'subseparator': { 'left': 'î‚±', 'right': 'î‚³' },
             \ }
 silent! set background=dark
 silent! set termguicolors
-silent! colorscheme deep-space
+silent! colorscheme hydrangea
 set mousemodel=popup
 set t_Co=256
 set guioptions=egmrti
@@ -238,7 +245,7 @@ else
   " IndentLine
   let g:indentLine_enabled = 1
   let g:indentLine_concealcursr = 1
-  let g:indentLine_char = '┆'
+  let g:indentLine_char = 'â”†'
   let g:indentLine_faster = 1
   let g:indentLine_color_term = 239
 
@@ -401,7 +408,14 @@ augroup vimrc-make-cmake
   autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
 augroup END
 
-
+"" anyfold - foldmethod
+augroup vimrc-anyfold
+    autocmd!
+    autocmd Filetype * AnyFoldActivate
+    set foldlevel=0
+    colorscheme despacio
+    hi Folded term=underline
+augroup END
 "" make pydoc
 set autoread
 
@@ -686,30 +700,30 @@ endif
 if !exists('g:airline_powerline_fonts')
   let g:airline#extensions#tabline#left_sep = ' '
   let g:airline#extensions#tabline#left_alt_sep = '|'
-  let g:airline_left_sep          = '▶'
-  let g:airline_left_alt_sep      = '»'
-  let g:airline_right_sep         = '◀'
-  let g:airline_right_alt_sep     = '«'
-  let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
-  let g:airline#extensions#readonly#symbol   = '⊘'
-  let g:airline#extensions#linecolumn#prefix = '¶'
-  let g:airline#extensions#paste#symbol      = 'ρ'
-  let g:airline_symbols.linenr    = '␊'
-  let g:airline_symbols.branch    = '⎇'
-  let g:airline_symbols.paste     = 'ρ'
-  let g:airline_symbols.paste     = 'Þ'
-  let g:airline_symbols.paste     = '∥'
-  let g:airline_symbols.whitespace = 'Ξ'
+  let g:airline_left_sep          = 'â–¶'
+  let g:airline_left_alt_sep      = 'Â»'
+  let g:airline_right_sep         = 'â—€'
+  let g:airline_right_alt_sep     = 'Â«'
+  let g:airline#extensions#branch#prefix     = 'â¤´' "âž”, âž¥, âŽ‡
+  let g:airline#extensions#readonly#symbol   = 'âŠ˜'
+  let g:airline#extensions#linecolumn#prefix = 'Â¶'
+  let g:airline#extensions#paste#symbol      = 'Ï'
+  let g:airline_symbols.linenr    = 'âŠ'
+  let g:airline_symbols.branch    = 'âŽ‡'
+  let g:airline_symbols.paste     = 'Ï'
+  let g:airline_symbols.paste     = 'Ãž'
+  let g:airline_symbols.paste     = 'âˆ¥'
+  let g:airline_symbols.whitespace = 'Îž'
 else
-  let g:airline#extensions#tabline#left_sep = ''
-  let g:airline#extensions#tabline#left_alt_sep = ''
+  let g:airline#extensions#tabline#left_sep = 'î‚°'
+  let g:airline#extensions#tabline#left_alt_sep = 'î‚±'
 
   " powerline symbols
-  let g:airline_left_sep = ''
-  let g:airline_left_alt_sep = ''
-  let g:airline_right_sep = ''
-  let g:airline_right_alt_sep = ''
-  let g:airline_symbols.branch = ''
-  let g:airline_symbols.readonly = ''
-  let g:airline_symbols.linenr = ''
+  let g:airline_left_sep = 'î‚°'
+  let g:airline_left_alt_sep = 'î‚±'
+  let g:airline_right_sep = 'î‚²'
+  let g:airline_right_alt_sep = 'î‚³'
+  let g:airline_symbols.branch = 'î‚ '
+  let g:airline_symbols.readonly = 'î‚¢'
+  let g:airline_symbols.linenr = 'î‚¡'
 endif
