@@ -135,7 +135,6 @@ Plug 'ingydotnet/yaml-vim', { 'for': ['yaml', 'yml'] }
 
 " Julia
 "" Julia Bundle
-Plug 'benekastah/neomake'
 Plug 'zyedidia/julialint.vim'
 Plug 'JuliaEditorSupport/julia-vim'
 
@@ -207,12 +206,12 @@ syntax on
 set ruler
 set number
 
+"" Menu and Editor color
 let no_buffers_menu=1
 "let g:despacio_Sunset=1
 "silent! colorscheme despacio
-"silent! colorscheme hydrangea 
 let g:lightline = {
-            \ 'colorscheme': 'deepspace',
+            \ 'colorscheme': 'snow',
             \ 'component': {
             \   'readonly': '%{&readonly?"":""}',
             \ },
@@ -221,7 +220,7 @@ let g:lightline = {
             \ }
 silent! set background=dark
 silent! set termguicolors
-silent! colorscheme deep-space
+silent! colorscheme snow
 set mousemodel=popup
 set t_Co=256
 set guioptions=egmrti
@@ -257,11 +256,6 @@ endif
 if &term =~ '256color'
   set t_ut=
 endif
-
-" Change color
-"
-" set background=dark
-" colorscheme gruvbox
 
 "" Disable the blinking cursor.
 set gcr=a:blinkon0
