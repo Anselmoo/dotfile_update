@@ -16,7 +16,8 @@ echo "Setting-up the dotfiles for vimrc, zshrc, tmux, and alias"
 cp -i vimrc ~/.vimrc
 cp -i zshrc ~/.zshrc
 cp -i tmux ~/.tmux
-cp -i alias ~/.alias
+cp -i shortcuts ~/.shortcuts
+cp -i p10k.zsh ~/.p10k.zsh
 
 
 echo "Setting-up python3"
