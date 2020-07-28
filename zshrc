@@ -1,5 +1,12 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # :: Zplug - ZSH plugin manager
-export ZPLUG_HOME=$HOME/.zplug
+export ZPLUG_HOME=/usr/local/Cellar/zplug/2.4.2
 
 # Essential
 source $ZPLUG_HOME/init.zsh
@@ -45,45 +52,45 @@ zplug "djui/alias-tips"
 zplug "felixr/docker-zsh-completion"
 
 # Load theme
-zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
+zplug "romkatv/powerlevel10k", as:theme, depth:1
+# zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 
 # Theme setup
-#POWERLEVEL9K_MODE='awesome-fontconfig'
-#POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_PROMPT_ON_NEWLINE=false
-POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
-POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="❱ "
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir dir_writable vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time todo background_jobs os_icon)
-POWERLEVEL9K_DISABLE_RPROMPT=false
-POWERLEVEL9K_ALWAYS_SHOW_CONTEXT=false
+#POWERLEVEL9K_PROMPT_ON_NEWLINE=false
+#POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
+#POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="❱ "
+#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir dir_writable vcs)
+#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time todo background_jobs os_icon)
+#POWERLEVEL9K_DISABLE_RPROMPT=false
+#POWERLEVEL9K_ALWAYS_SHOW_CONTEXT=false
+#
+#POWERLEVEL9K_STATUS_VERBOSE=true
+#POWERLEVEL9K_STATUS_OK_IN_NON_VERBOSE=false
+#
+#POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+#POWERLEVEL9K_SHORTEN_DELIMITER=""
+#POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
+#
+#POWERLEVEL9K_OS_ICON_FOREGROUND="black"
+#POWERLEVEL9K_OS_ICON_BACKGROUND="white"
+#POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND="black"
+#POWERLEVEL9K_BACKGROUND_JOBS_BACKGROUND="blue"
+#POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND="black"
+#POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND="yellow"
+#POWERLEVEL9K_STATUS_ERROR_FOREGROUND="black"
+#POWERLEVEL9K_STATUS_ERROR_BACKGROUND="red"
+#POWERLEVEL9K_STATUS_OK_FOREGROUND="black"
+#POWERLEVEL9K_STATUS_OK_BACKGROUND="green"
+#POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND="black"
+#POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND="yellow"
+#POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND="black"
+#POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND="red"
+#POWERLEVEL9K_NODE_VERSION_BACKGROUND="red"
+#POWERLEVEL9K_NODE_VERSION_FOREGROUND="white"
+#plugins=(virtualenv)
+#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status virtualenv)
 
-POWERLEVEL9K_STATUS_VERBOSE=true
-POWERLEVEL9K_STATUS_OK_IN_NON_VERBOSE=false
-
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
-POWERLEVEL9K_SHORTEN_DELIMITER=""
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
-
-POWERLEVEL9K_OS_ICON_FOREGROUND="black"
-POWERLEVEL9K_OS_ICON_BACKGROUND="white"
-POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND="black"
-POWERLEVEL9K_BACKGROUND_JOBS_BACKGROUND="blue"
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND="black"
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND="yellow"
-POWERLEVEL9K_STATUS_ERROR_FOREGROUND="black"
-POWERLEVEL9K_STATUS_ERROR_BACKGROUND="red"
-POWERLEVEL9K_STATUS_OK_FOREGROUND="black"
-POWERLEVEL9K_STATUS_OK_BACKGROUND="green"
-POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND="black"
-POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND="yellow"
-POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND="black"
-POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND="red"
-POWERLEVEL9K_NODE_VERSION_BACKGROUND="red"
-POWERLEVEL9K_NODE_VERSION_FOREGROUND="white"
 plugins=(virtualenv)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status virtualenv)
-
 export ZSH_PLUGINS_ALIAS_TIPS_TEXT=' alias hint: '
 
 # User configuration
@@ -103,7 +110,7 @@ alias sb="showmarks"
 alias td="todo.sh"
 
 # Loading the big alias-list as shortcuts-dotfile
-. ~/.alias
+. ~/.shortcuts
 
 # Multiline/Singleline
 alias multi_line="export POWERLEVEL9K_PROMPT_ON_NEWLINE=true"
@@ -141,3 +148,6 @@ fi
 zplug load
 export PATH="/usr/local/bin:$PATH"
 export PATH="~/bin:$PATH"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
