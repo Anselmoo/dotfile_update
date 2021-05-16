@@ -39,7 +39,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug 'vim-scripts/grep.vim'
 Plug 'vim-scripts/CSApprox'
-Plug 'Raimondi/delimitMate'
+" Plug 'Raimondi/delimitMate'
 Plug 'majutsushi/tagbar'
 Plug 'w0rp/ale'
 Plug 'Yggdroot/indentLine'
@@ -71,6 +71,7 @@ Plug 'maksimr/vim-jsbeautify'
 Plug 'vim-syntastic/syntastic'
 Plug 'neomake/neomake'
 Plug 'Valloric/YouCompleteMe'
+"Plug 'zxqfl/tabnine-vim'
 Plug 'heavenshell/vim-pydocstring' " Pydoc completer for vim
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -281,6 +282,8 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 
+" Snipmate
+let g:snipMate = { 'snippet_version' : 1 }
 " Neomake settings
 augroup vimrc-neomake
     autocmd! BufWritePost * Neomake
@@ -300,7 +303,9 @@ augroup markdown
 augroup END
 
 " Vim-Supertab Configuration
-let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+"let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+let g:SuperTabDefaultCompletionType = "<C-n>"
+set omnifunc=syntaxcomplete#Complete
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
@@ -638,22 +643,14 @@ let g:ycm_extra_conf_globlist = ['~/repos/*']
 let g:ycm_filetype_specific_completion_to_disable = {'javascript': 1}
 let g:ycm_rust_src_path = $HOME . '/repos/rust/src'
 
-" Kite
-let g:kite_supported_languages = ['python', 'javascript', 'go']
-let g:kite_auto_complete=1
-let g:kite_tab_complete=1
-let g:kite_documentation_continual=1
-set completeopt+=preview
-autocmd CompleteDone * if !pumvisible() | pclose | endif
-
 " Also see the 'pumheight' vim option!
 let g:ycm_max_num_identifier_candidates = 10
 let g:ycm_clangd_uses_ycmd_caching = 1
-
-nnoremap <leader>y :YcmForceCompileAndDiagnostics<cr>
-nnoremap <leader>g :YcmCompleter GoTo<CR>
-nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
+           
+nnoremap <Leader>y :YcmForceCompileAndDiagnostics<CR>
+nnoremap <Leader>g :YcmCompleter GoTo<CR>
+nnoremap <Leader>pd :YcmCompleter GoToDefinition<CR>
+nnoremap <Leader>pc :YcmCompleter GoToDeclaration<CR>
 nnoremap <F9> :YcmCompleter RefactorRename<space>
 
 
